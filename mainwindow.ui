@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>247</width>
-    <height>145</height>
+    <width>276</width>
+    <height>102</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -58,13 +58,13 @@
       <property name="font">
        <font>
         <family>Avenir</family>
-        <pointsize>72</pointsize>
+        <pointsize>42</pointsize>
         <weight>50</weight>
         <bold>false</bold>
        </font>
       </property>
       <property name="text">
-       <string>12:56</string>
+       <string>-00:12:56</string>
       </property>
       <property name="scaledContents">
        <bool>false</bool>

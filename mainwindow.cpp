@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     restoreGeometry( QSettings().value("geometry").toByteArray());
 
     connect(&timer, SIGNAL(timeout()), this, SLOT(loop()));
+    timer.setSingleShot(false);
     timer.start(1000);
 }
 
