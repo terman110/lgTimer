@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pausePressed();
     _running = false;
 
-    connect( playBtn,         SIGNAL(clicked()),this, SLOT(playPressed()));
+    connect( playBtn,       SIGNAL(clicked()),this, SLOT(playPressed()));
     connect( pauseBtn,      SIGNAL(clicked()),this, SLOT(pausePressed()));
     connect( repeatBtn,     SIGNAL(clicked()),this, SLOT(repeatPressed()));
     connect( settingsBtn,   SIGNAL(clicked()),this, SLOT(settingsPressed()));
@@ -130,28 +130,44 @@ void MainWindow::settingsPressed() {
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event) {
-    if (event->button() == Qt::LeftButton) {
+    if( event->button() == Qt::LeftButton) {
         _moving = true;
         _mpos = event->pos();
+    }
+    else if( event->button() == Qt::RightButton) {
+        settingsPressed();
     }
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event) {
-    if ((event->buttons() & Qt::LeftButton) && _moving) {
+    if( (event->buttons() & Qt::LeftButton) && _moving) {
         QRect w_pos = geometry();
         QPoint m_pos = event->pos();
+        QRect scrn = QApplication::desktop()->availableGeometry(this);
+
+        int s_height = scrn.height();
+        int s_width = scrn.width();
+        int s_x = scrn.x();
+        int s_y = scrn.y();
+
         int x = w_pos.x() + ( m_pos.x() - _mpos.x());
-        if( x < 0)
-            x = 0;
+        if( x < s_x)
+            x = s_x;
+        if( x + w_pos.width() > s_width)
+            x = s_width - w_pos.width();
+
         int y = w_pos.y() + (m_pos.y() - _mpos.y());
-        if( y < 0)
-            y = 0;
+        if( y < s_y)
+            y = s_y;
+        if( y + w_pos.height() > s_height)
+            y = s_height - w_pos.height();
+
         move( QPoint( x, y));
     }
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
-    if (event->button() == Qt::LeftButton && _moving) {
+    if( event->button() == Qt::LeftButton && _moving) {
         _moving = false;
         QSettings().setValue("geometry", saveGeometry());
     }

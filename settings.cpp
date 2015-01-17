@@ -5,6 +5,28 @@ Settings::Settings(QWidget *parent, SettingsParameter param) :
 {
     setupUi(this);
 
+    QRect w_pos = geometry();
+    QRect scrn = QApplication::desktop()->availableGeometry(this);
+
+    int s_height = scrn.height();
+    int s_width = scrn.width();
+    int s_x = scrn.x();
+    int s_y = scrn.y();
+
+    int x = w_pos.x();
+    if( x < s_x)
+        x = s_x;
+    if( x + w_pos.width() > s_width)
+        x = s_width - w_pos.width();
+
+    int y = w_pos.y();
+    if( y < s_y)
+        y = s_y;
+    if( y + w_pos.height() > s_height)
+        y = s_height - w_pos.height();
+
+    move( QPoint( x, y));
+
     qlonglong sec = param.seconds;
     qlonglong hrs = sec / 3600;
     sec -= hrs * 3600;

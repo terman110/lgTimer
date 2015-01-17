@@ -3,6 +3,7 @@
 
 #include "ui_settings.h"
 #include <QDebug>
+#include <QDesktopWidget>
 
 struct SettingsParameter
 {

@@ -11,6 +11,7 @@
 #include <QTimer>
 #include <QMessageBox>
 #include <QSound>
+#include <QDesktopWidget>
 
 class MainWindow :
         public QMainWindow,
