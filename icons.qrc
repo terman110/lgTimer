@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="cogwheel">icons/cogwheel.png</file>
+        <file alias="edit">icons/edit.png</file>
+        <file alias="pause">icons/pause.png</file>
+        <file alias="play_btn">icons/play-button.png</file>
+        <file alias="play">icons/play.png</file>
+        <file alias="refresh">icons/refresh.png</file>
+        <file alias="repeat">icons/repeat.png</file>
+        <file alias="settings">icons/settings.png</file>
+        <file alias="exit">icons/exit.png</file>
+    </qresource>
+    <qresource prefix="/sound">
+        <file alias="bell">sound/bell.wav</file>
+    </qresource>
+</RCC>
