@@ -5,6 +5,10 @@ Settings::Settings(QWidget *parent, SettingsParameter param) :
 {
     setupUi(this);
 
+    setWindowFlags(Qt::FramelessWindowHint|windowFlags());
+
+    update();
+
     QRect w_pos = geometry();
     QRect scrn = QApplication::desktop()->availableGeometry(this);
 

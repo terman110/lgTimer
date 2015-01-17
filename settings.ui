@@ -26,7 +26,19 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Timer Settings</string>
+   <string>Settings</string>
+  </property>
+  <property name="windowOpacity">
+   <double>0.900000000000000</double>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog{
+	background: rgb( 128, 128, 128);
+}
+
+QLabel{
+	color: rgb(255, 255, 255);
+}</string>
   </property>
   <property name="modal">
    <bool>true</bool>
