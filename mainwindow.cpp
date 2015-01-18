@@ -28,7 +28,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     restoreGeometry( QSettings().value("geometry").toByteArray());
 
-    setGeometry( geometry().x(), geometry().y(), 200, 95);
+    setGeometry( geometry().x(), geometry().y(), 225, 95);
+
+    playBtn->hide();
+    pauseBtn->hide();
+    repeatBtn->hide();
+    settingsBtn->hide();
+    exitBtn->hide();
 
     connect(&timer, SIGNAL(timeout()), this, SLOT(loop()));
     timer.setSingleShot(false);
@@ -182,4 +188,20 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
         _moving = false;
         QSettings().setValue("geometry", saveGeometry());
     }
+}
+
+void MainWindow::enterEvent(QEvent *) {
+    playBtn->show();
+    pauseBtn->show();
+    repeatBtn->show();
+    settingsBtn->show();
+    exitBtn->show();
+}
+
+void MainWindow::leaveEvent(QEvent *) {
+    playBtn->hide();
+    pauseBtn->hide();
+    repeatBtn->hide();
+    settingsBtn->hide();
+    exitBtn->hide();
 }

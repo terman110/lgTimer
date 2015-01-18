@@ -281,7 +281,7 @@ QCheckBox {
       </font>
      </property>
      <property name="text">
-      <string>lgTimer 1.0 by lightgraffiti.de published in the public domain</string>
+      <string>lgTimer 1.1 by lightgraffiti.de published in the public domain</string>
      </property>
     </widget>
    </item>

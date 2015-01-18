@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     a.setApplicationName("lgTimer");
-    a.setApplicationVersion("1.0.2");
+    a.setApplicationVersion("1.1.0");
     a.setApplicationDisplayName("lgTimer");
     a.setOrganizationName("lightgraffiti");
     a.setOrganizationDomain("lightgraffiti.de");
