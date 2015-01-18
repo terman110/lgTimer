@@ -44,9 +44,9 @@ void MainWindow::setBackground( unsigned char r, unsigned char g, unsigned char 
 
 void MainWindow::setLabelColor( unsigned char r, unsigned char g, unsigned char b) {
     timeLabel->setStyleSheet(QString("QLabel { color : rgb(") + QString::number((int)r) + "," + QString::number((int)g) + "," + QString::number((int)b) + "); }");
-//    timeLabel->style()->unpolish(this);
-//    timeLabel->style()->polish(this);
-//    timeLabel->update();
+    timeLabel->style()->unpolish(this);
+    timeLabel->style()->polish(this);
+    timeLabel->update();
 }
 
 QString MainWindow::numToStr( qlonglong num) {
@@ -79,9 +79,6 @@ void MainWindow::setTimeLabel( qlonglong sec) {
     timeLabel->setText( str);
 
     setBackground( r, g, b);
-//    style()->unpolish(this);
-//    style()->polish(this);
-//    update();
 }
 
 void MainWindow::loop() {
