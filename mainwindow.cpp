@@ -15,11 +15,11 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint);
 
     setTimeLabel( param.seconds);
-    setBackground( 128, 128, 128);
-    setLabelColor( 255, 255, 255);
     _running = true;
     pausePressed();
     _running = false;
+    setBackground( 128, 128, 128);
+    setLabelColor( 255, 255, 255);
 
     connect( playBtn,       SIGNAL(clicked()),this, SLOT(playPressed()));
     connect( pauseBtn,      SIGNAL(clicked()),this, SLOT(pausePressed()));
@@ -37,9 +37,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::setBackground( unsigned char r, unsigned char g, unsigned char b) {
     setStyleSheet(QString("QMainWindow{\n	background: rgb(") + QString::number((int)r) + "," + QString::number((int)g) + "," + QString::number((int)b) + ");\n}");
-//    style()->unpolish(this);
-//    style()->polish(this);
-//    update();
+    style()->unpolish(this);
+    style()->polish(this);
+    update();
 }
 
 void MainWindow::setLabelColor( unsigned char r, unsigned char g, unsigned char b) {
@@ -79,10 +79,9 @@ void MainWindow::setTimeLabel( qlonglong sec) {
     timeLabel->setText( str);
 
     setBackground( r, g, b);
-
-    style()->unpolish(this);
-    style()->polish(this);
-    update();
+//    style()->unpolish(this);
+//    style()->polish(this);
+//    update();
 }
 
 void MainWindow::loop() {
