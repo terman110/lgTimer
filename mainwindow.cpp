@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint);
 
     setTimeLabel( param.seconds);
+    setBackground( 128, 128, 128);
+    setLabelColor( 255, 255, 255);
     _running = true;
     pausePressed();
     _running = false;
@@ -26,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     restoreGeometry( QSettings().value("geometry").toByteArray());
 
+    setGeometry( geometry().x(), geometry().y(), 200, 95);
+
     connect(&timer, SIGNAL(timeout()), this, SLOT(loop()));
     timer.setSingleShot(false);
     timer.start(1000);
@@ -33,9 +37,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::setBackground( unsigned char r, unsigned char g, unsigned char b) {
     setStyleSheet(QString("QMainWindow{\n	background: rgb(") + QString::number((int)r) + "," + QString::number((int)g) + "," + QString::number((int)b) + ");\n}");
-    style()->unpolish(this);
-    style()->polish(this);
-    update();
+//    style()->unpolish(this);
+//    style()->polish(this);
+//    update();
+}
+
+void MainWindow::setLabelColor( unsigned char r, unsigned char g, unsigned char b) {
+    timeLabel->setStyleSheet(QString("QLabel { color : rgb(") + QString::number((int)r) + "," + QString::number((int)g) + "," + QString::number((int)b) + "); }");
+//    timeLabel->style()->unpolish(this);
+//    timeLabel->style()->polish(this);
+//    timeLabel->update();
 }
 
 QString MainWindow::numToStr( qlonglong num) {
@@ -68,13 +79,17 @@ void MainWindow::setTimeLabel( qlonglong sec) {
     timeLabel->setText( str);
 
     setBackground( r, g, b);
+
+    style()->unpolish(this);
+    style()->polish(this);
+    update();
 }
 
 void MainWindow::loop() {
     if( !_running)
         return;
     _remaining -= timer.interval() / 1000;
-    if( param.showSec || _remaining - _lastwritten >= 60)
+    if( param.showSec || abs(_remaining - _lastwritten) >= 60)
         setTimeLabel( _remaining);
     if( _remaining <= 0 && !_finished) {
         _finished = true;

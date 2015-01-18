@@ -32,6 +32,7 @@ protected:
     QTimer timer;
 
     void setBackground( unsigned char r, unsigned char g, unsigned char b);
+    void setLabelColor( unsigned char r, unsigned char g, unsigned char b);
 
     QString numToStr( qlonglong num);
     void setTimeLabel( qlonglong sec);
