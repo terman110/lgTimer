@@ -34,6 +34,10 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="icons.qrc">
+    <normaloff>:/icons/play_btn</normaloff>:/icons/play_btn</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">QDialog{
 	background: rgb( 128, 128, 128);
@@ -79,7 +83,7 @@ QPushButton {
     <property name="font">
      <font>
       <family>Avenir</family>
-      <pointsize>42</pointsize>
+      <pointsize>36</pointsize>
       <weight>50</weight>
       <bold>false</bold>
      </font>
@@ -97,7 +101,7 @@ QPushButton {
      <number>0</number>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>

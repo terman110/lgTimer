@@ -55,6 +55,24 @@ void MainWindow::setLabelColor( unsigned char r, unsigned char g, unsigned char 
     timeLabel->update();
 }
 
+QString MainWindow::buildTimeString( qlonglong sec, bool show_sec) {
+    qlonglong hrs = sec/3600;
+    sec -= hrs * 3600;
+    qlonglong min = sec/60;
+    sec -= min * 60;
+    QString str;
+    if( sec < 0 || min < 0 || hrs < 0){
+        sec *= -1;
+        min *= -1;
+        hrs *=-1;
+        str += "-";
+    }
+    str += QString() + numToStr(hrs) + ":" + numToStr(min);
+    if( show_sec)
+        str += QString(":") + numToStr(sec);
+    return str;
+}
+
 QString MainWindow::numToStr( qlonglong num) {
     return QString("%1").arg( num, 2, 10, QChar('0'));
 }
@@ -68,21 +86,7 @@ void MainWindow::setTimeLabel( qlonglong sec) {
     unsigned char g = 255. * secf;
     unsigned char b = 0;
 
-    qlonglong hrs = sec/3600;
-    sec -= hrs * 3600;
-    qlonglong min = sec/60;
-    sec -= min * 60;
-    QString str;
-    if( sec < 0 || min < 0 || hrs < 0){
-        sec *= -1;
-        min *= -1;
-        hrs *=-1;
-        str += "-";
-    }
-    str += QString() + numToStr(hrs) + ":" + numToStr(min);
-    if( param.showSec)
-        str += QString(":") + numToStr(sec);
-    timeLabel->setText( str);
+    timeLabel->setText( buildTimeString( sec, param.showSec));
 
     setBackground( r, g, b);
 }
@@ -91,6 +95,7 @@ void MainWindow::loop() {
     if( !_running)
         return;
     _remaining -= timer.interval() / 1000;
+    timeLabel->setToolTip( buildTimeString( _remaining, true));
     if( param.showSec || abs(_remaining - _lastwritten) >= 60)
         setTimeLabel( _remaining);
     if( _remaining <= 0 && !_finished) {
@@ -160,24 +165,26 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event) {
     if( (event->buttons() & Qt::LeftButton) && _moving) {
         QRect w_pos = geometry();
         QPoint m_pos = event->pos();
-        QRect scrn = QApplication::desktop()->availableGeometry(this);
-
-        int s_height = scrn.height();
-        int s_width = scrn.width();
-        int s_x = scrn.x();
-        int s_y = scrn.y();
-
         int x = w_pos.x() + ( m_pos.x() - _mpos.x());
-        if( x < s_x)
-            x = s_x;
-        if( x + w_pos.width() > s_width)
-            x = s_width - w_pos.width();
-
         int y = w_pos.y() + (m_pos.y() - _mpos.y());
-        if( y < s_y)
-            y = s_y;
-        if( y + w_pos.height() > s_height)
-            y = s_height - w_pos.height();
+        if( QApplication::desktop()->numScreens() <= 1) {
+            QRect scrn = QApplication::desktop()->availableGeometry(this);
+
+            int s_height = scrn.height();
+            int s_width = scrn.width();
+            int s_x = scrn.x();
+            int s_y = scrn.y();
+
+            if( x < s_x)
+                x = s_x;
+            if( x + w_pos.width() > s_width)
+                x = s_width - w_pos.width();
+
+            if( y < s_y)
+                y = s_y;
+            if( y + w_pos.height() > s_height)
+                y = s_height - w_pos.height();
+        }
 
         move( QPoint( x, y));
     }

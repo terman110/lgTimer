@@ -34,6 +34,7 @@ protected:
     void setBackground( unsigned char r, unsigned char g, unsigned char b);
     void setLabelColor( unsigned char r, unsigned char g, unsigned char b);
 
+    QString buildTimeString( qlonglong sec, bool show_sec = false);
     QString numToStr( qlonglong num);
     void setTimeLabel( qlonglong sec);
 
