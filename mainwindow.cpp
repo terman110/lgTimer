@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setupUi(this);
     setWindowTitle("lgTimer");
     setWindowOpacity( param.opacity);
-    setWindowFlags(Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint);
+    setWindowFlags( windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 
     setTimeLabel( param.seconds);
     _running = true;
